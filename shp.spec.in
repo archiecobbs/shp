@@ -29,6 +29,9 @@ BuildRoot:      %{_tmppath}/%{name}-root
 Buildarch:      noarch
 Source:         %{name}-%{version}.tar.gz
 URL:            http://code.google.com/p/%{name}/
+BuildRequires:  bash
+BuildRequires:  gawk
+BuildRequires:  openssl
 Requires:       bash
 Requires:       gawk
 Requires:       openssl
