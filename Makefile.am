@@ -42,5 +42,5 @@ SUFFIXES=           .in
 .in:
 		    rm -f $@; $(subst) < $< >$@
 
-DISTCLEANFILES=     shp shp.1 shp.spec
+DISTCLEANFILES=     shp shp.1 shp.spec shp.awk
 
