@@ -16,14 +16,10 @@
 # limitations under the License.
 #
 
-AC_INIT([shp Like PHP except you write your script in shell script],
-  1.0.0,
-  [http://code.google.com/p/shp/], [shp])
-
 # Initialize autoconf
-#AC_INIT([shp Like PHP except you write your script in shell script],
-#  m4_esyscmd([git describe --tags --always --abbrev=8 --dirty | sed 's/^v//g' | tr '-' '_' | tr -d '\n']),
-#  [http://code.google.com/p/shp/], [shp])
+AC_INIT([shp Like PHP except you write your script in shell script],
+  m4_esyscmd([git describe --tags --always --abbrev=8 --dirty | sed 's/^v//g' | tr '-' '_' | tr -d '\n']),
+  [http://code.google.com/p/shp/], [shp])
 AC_CONFIG_AUX_DIR(scripts)
 AM_INIT_AUTOMAKE
 dnl AM_MAINTAINER_MODE
