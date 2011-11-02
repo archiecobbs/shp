@@ -3,8 +3,9 @@
 BEGIN {
     RS="(<\\?shp[[:space:]]*)|(\\?>)"
     FS=""
-    "head -c 24 /dev/urandom | @OPENSSL@ enc -e -base64 | tr -d '\n'" | getline DELIM
+    "@HEAD@ -c 24 /dev/urandom | @OPENSSL@ enc -e -base64 | @TR@ -d '\n'" | getline DELIM
     DOING_SCRIPT="0"
+    FIRST_TIME="1"
     printf "#!@BASH@\n"
 }
 
@@ -20,6 +21,11 @@ BEGIN {
             printf "%s", RT
         }
     } else {
+        if (FIRST_TIME == "1") {
+            if (match(TEXT, /^#![^\n]*\n/) > 0)
+                TEXT = substr(TEXT, RLENGTH + 1)
+            FIRST_TIME="0"
+        }
         if (length(TEXT) > 0) {
             printf "\nhead -c %d << '===%s==='\n", length(TEXT), DELIM
             printf "%s\n===%s===\n\n", TEXT, DELIM

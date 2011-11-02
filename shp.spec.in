@@ -29,12 +29,16 @@ BuildRoot:      %{_tmppath}/%{name}-root
 Buildarch:      noarch
 Source:         %{name}-%{version}.tar.gz
 URL:            http://code.google.com/p/%{name}/
-BuildRequires:  bash
-BuildRequires:  gawk
-BuildRequires:  openssl
-Requires:       bash
-Requires:       gawk
-Requires:       openssl
+BuildRequires:  @BASH@
+BuildRequires:  @GAWK@
+BuildRequires:  @OPENSSL@
+BuildRequires:  @HEAD@
+BuildRequires:  @TR@
+Requires:       @BASH@
+Requires:       @GAWK@
+Requires:       @OPENSSL@
+Requires:       @HEAD@
+Requires:       @TR@
 
 %description
 %{name} parses and executes SHP scripts in the manner of PHP, except nested

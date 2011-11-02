@@ -42,6 +42,14 @@ AC_PATH_PROG([OPENSSL], [openssl], [], [])
 if test -z "${OPENSSL}"; then
     AC_MSG_ERROR([openssl not found]);
 fi
+AC_PATH_PROG([HEAD], [head], [], [])
+if test -z "${HEAD}"; then
+    AC_MSG_ERROR([head not found]);
+fi
+AC_PATH_PROG([TR], [tr], [], [])
+if test -z "${TR}"; then
+    AC_MSG_ERROR([tr not found]);
+fi
 
 # Check for /dev/urandom
 AC_CHECK_FILE([/dev/urandom], [], AC_MSG_ERROR([/dev/urandom not found]))

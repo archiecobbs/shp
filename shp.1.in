@@ -25,6 +25,11 @@ Otherwise, any subsequent arguments are passed to the script.
 .Pp
 To pass arguments to a standard input script, use `-' for
 .Ar script .
+.Pp
+If the first line of the input script starts with a shebang (`#!'), it is ignored.
+This allows scripts to be made executable by putting
+.Pa #!@bindir@/shp
+as the first line.
 .Sh VERSION
 This man page documents
 .Nm

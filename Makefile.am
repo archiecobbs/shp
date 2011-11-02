@@ -33,6 +33,8 @@ subst=              sed \
 			-e 's|@PACKAGE_VERSION[@]|$(PACKAGE_VERSION)|g' \
 			-e 's|@BASH[@]|$(BASH)|g' \
 			-e 's|@GAWK[@]|$(GAWK)|g' \
+			-e 's|@HEAD[@]|$(HEAD)|g' \
+			-e 's|@TR[@]|$(TR)|g' \
 			-e 's|@OPENSSL[@]|$(OPENSSL)|g' \
 			-e 's|@pkgdatadir[@]|$(pkgdatadir)|g' \
 			-e 's|@bindir[@]|$(bindir)|g' \
