@@ -1,0 +1,83 @@
+#!@BASH@
+
+# Set constants and defaults
+NAME="@PACKAGE@"
+VERSION="@PACKAGE_VERSION@"
+
+# Usage message
+usage()
+{
+    echo "Usage:" 1>&2
+    echo "    ${NAME} [ file [ args ... ] ]" 1>&2
+    echo "Options:" 1>&2
+    echo "    --help      Display this help message and exit" 1>&2
+    echo "    --version   Display version and exit" 1>&2
+}
+
+# Show version
+show_version()
+{
+    echo "${NAME} version ${VERSION}"
+}
+
+# Log functions
+log()
+{
+    echo ${NAME}: ${1+"$@"} 1>&2
+}
+
+verbose_log()
+{
+    if "${VERBOSE}"; then
+        echo ${NAME}: ${1+"$@"} 1>&2
+    fi
+}
+
+# Error function
+errout()
+{
+    log ${1+"$@"}
+    exit 1
+}
+
+# Bail on errors
+set -e
+
+# Parse flags passed in on the command line
+while [ ${#} -gt 0 ]; do
+    case "$1" in
+        -h|--help)
+            usage
+            exit
+            ;;
+        --version)
+            show_version
+            exit
+            ;;
+        -h|--help)
+            usage
+            exit
+            ;;
+        --)
+            shift
+            break
+            ;;
+        -*)
+            errout "unrecognized flag \`${1}'"
+            ;;
+        *)
+            break
+            ;;
+    esac
+done
+
+# Get script file (if any)
+SCRIPT=""
+if [ $# -gt 0 ]; then
+    SCRIPT="$1"
+    shift
+fi  
+
+# Run
+@GAWK@ -f @pkgdatadir@/shp.awk ${SCRIPT} | exec @BASH@ -s ${1+"$@"}
+

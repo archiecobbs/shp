@@ -1,0 +1,33 @@
+.\"  -*- nroff -*-
+.\"
+.Dd November 1, 2011
+.Dt SHP 1
+.Os
+.Sh NAME
+.Nm shp
+.Nd Like PHP except you write your script in shell script
+.Sh SYNOPSIS
+.Nm shp
+.Op Ar script Op args ...
+.Sh DESCRIPTION
+.Nm
+parses and executes SHP scripts in the manner of PHP, except nested scripts
+are written in shell scripting language instead of the PHP language.
+.Nm
+outputs its script file, with nested
+.Pa <?shp ... ?>
+blocks executed as shell scripts.
+.Pp
+If no
+.Ar script
+is provided, standard input is read.
+Otherwise, any subsequent arguments are passed to the script.
+.Pp
+To pass arguments to a standard input script, use `-' for
+.Ar script .
+.Sh VERSION
+This man page documents
+.Nm
+version @PACKAGE_VERSION@.
+.Sh AUTHOR
+.An Archie L. Cobbs Aq archie@dellroad.org

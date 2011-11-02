@@ -1,0 +1,33 @@
+# $Id$
+
+BEGIN {
+    RS="(<\\?shp[[:space:]]*)|(\\?>)"
+    FS=""
+    "head -c 24 /dev/urandom | @OPENSSL@ enc -e -base64 | tr -d '\n'" | getline DELIM
+    DOING_SCRIPT="0"
+    printf "#!@BASH@\n"
+}
+
+{
+    TEXT = $0
+    if (DOING_SCRIPT == "1") {
+        printf "%s", TEXT
+        if (RT == "?>") {
+            if (length(TEXT) == 0 || substr(TEXT, length(TEXT), 1) != "\n")
+                printf "\n"
+            DOING_SCRIPT="0"
+        } else {
+            printf "%s", RT
+        }
+    } else {
+        if (length(TEXT) > 0) {
+            printf "\nhead -c %d << '===%s==='\n", length(TEXT), DELIM
+            printf "%s\n===%s===\n\n", TEXT, DELIM
+        }
+        if (RT == "?>")
+            printf "echo -n '?>'\n"
+        else
+            DOING_SCRIPT="1"
+    }
+}
+

@@ -1,0 +1,19 @@
+shp - Like PHP except you write your script in shell script
+
+The shp utility works like PHP, but:
+
+    o Instead of scripting in the PHP language, you use bash shell script
+
+    o You use <?shp ... ?> instead of <?php ... ?> to embed the script
+
+Home page: http://shp.googlecode.com/
+
+See INSTALL for installation instructions. After installing, see the shp(1)
+man page for how to run it.
+
+See COPYING for license.
+
+See CHANGES for change history.
+
+Enjoy!
+
