@@ -62,7 +62,7 @@ while [ ${#} -gt 0 ]; do
             shift
             break
             ;;
-        -*)
+        -?*)
             errout "unrecognized flag \`${1}'"
             ;;
         *)
