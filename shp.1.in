@@ -30,6 +30,18 @@ If the first line of the input script starts with a shebang (`#!'), it is ignore
 This allows scripts to be made executable by putting
 .Pa #!@bindir@/shp
 as the first line.
+.Sh OPTIONS
+.Bl -tag -width XXX
+.It Fl \-dump
+Just output the generated shell script instead of executing it.
+.It Fl \-shell
+Specify an alternate shell (the default is `@BASH@ -s').
+.It Fl \-help
+Display command line help.
+.It Fl \-version
+Display version and exit.
+.El
+.It Fl a
 .Sh VERSION
 This man page documents
 .Nm

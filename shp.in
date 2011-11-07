@@ -1,15 +1,18 @@
 #!@BASH@
 
 # Set constants and defaults
-NAME="@PACKAGE@"
-VERSION="@PACKAGE_VERSION@"
+SHP_NAME="@PACKAGE@"
+SHP_VERSION="@PACKAGE_VERSION@"
+DEFAULT_SHP_SHELL="@BASH@ -s"
 
 # Usage message
 usage()
 {
     echo "Usage:" 1>&2
-    echo "    ${NAME} [ file [ args ... ] ]" 1>&2
+    echo "    ${SHP_NAME} [ file [ args ... ] ]" 1>&2
     echo "Options:" 1>&2
+    echo "    --dump      Dump generated shell script instead of executing it" 1>&2
+    echo "    --shell     Specify alternate shell (default \`${DEFAULT_SHP_SHELL}')" 1>&2
     echo "    --help      Display this help message and exit" 1>&2
     echo "    --version   Display version and exit" 1>&2
 }
@@ -17,19 +20,19 @@ usage()
 # Show version
 show_version()
 {
-    echo "${NAME} version ${VERSION}"
+    echo "${SHP_NAME} version ${SHP_VERSION}"
 }
 
 # Log functions
 log()
 {
-    echo ${NAME}: ${1+"$@"} 1>&2
+    echo ${SHP_NAME}: ${1+"$@"} 1>&2
 }
 
 verbose_log()
 {
     if "${VERBOSE}"; then
-        echo ${NAME}: ${1+"$@"} 1>&2
+        echo ${SHP_NAME}: ${1+"$@"} 1>&2
     fi
 }
 
@@ -44,11 +47,22 @@ errout()
 set -e
 
 # Parse flags passed in on the command line
+SHP_DUMP="false"
+SHP_SHELL="${DEFAULT_SHP_SHELL}"
 while [ ${#} -gt 0 ]; do
     case "$1" in
         -h|--help)
             usage
             exit
+            ;;
+        --dump)
+            shift
+            SHP_DUMP="true"
+            ;;
+        --shell)
+            shift
+            shift
+            SHP_SHELL="$1"
             ;;
         --version)
             show_version
@@ -72,12 +86,17 @@ while [ ${#} -gt 0 ]; do
 done
 
 # Get script file (if any)
-SCRIPT=""
+SHP_SCRIPT=""
 if [ $# -gt 0 ]; then
-    SCRIPT="$1"
+    SHP_SCRIPT="$1"
     shift
 fi  
 
+# Dump?
+if [ "${SHP_DUMP}" = 'true' ]; then
+    exec @GAWK@ -f @pkgdatadir@/shp.awk ${SHP_SCRIPT}
+fi
+
 # Run
-@GAWK@ -f @pkgdatadir@/shp.awk ${SCRIPT} | exec @BASH@ -s ${1+"$@"}
+@GAWK@ -f @pkgdatadir@/shp.awk ${SHP_SCRIPT} | exec ${SHP_SHELL} ${1+"$@"}
 
