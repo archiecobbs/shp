@@ -32,6 +32,8 @@ This allows scripts to be made executable by putting
 as the first line.
 .Sh OPTIONS
 .Bl -tag -width XXX
+.It Fl \-check
+Just check the syntax of the script instead of executing it.
 .It Fl \-dump
 Just output the generated shell script instead of executing it.
 .It Fl \-shell

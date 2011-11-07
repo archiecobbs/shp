@@ -11,6 +11,7 @@ usage()
     echo "Usage:" 1>&2
     echo "    ${SHP_NAME} [ file [ args ... ] ]" 1>&2
     echo "Options:" 1>&2
+    echo "    --check     Check script syntax only (don't execute it)" 1>&2
     echo "    --dump      Dump generated shell script instead of executing it" 1>&2
     echo "    --shell     Specify alternate shell (default \`${DEFAULT_SHP_SHELL}')" 1>&2
     echo "    --help      Display this help message and exit" 1>&2
@@ -47,6 +48,7 @@ errout()
 set -e
 
 # Parse flags passed in on the command line
+SHP_CHECK="false"
 SHP_DUMP="false"
 SHP_SHELL="${DEFAULT_SHP_SHELL}"
 while [ ${#} -gt 0 ]; do
@@ -54,6 +56,10 @@ while [ ${#} -gt 0 ]; do
         -h|--help)
             usage
             exit
+            ;;
+        --check)
+            shift
+            SHP_CHECK="true"
             ;;
         --dump)
             shift
@@ -95,6 +101,11 @@ fi
 # Dump?
 if [ "${SHP_DUMP}" = 'true' ]; then
     exec @GAWK@ -f @pkgdatadir@/shp.awk ${SHP_SCRIPT}
+fi
+
+# Check?
+if [ "${SHP_CHECK}" = 'true' ]; then
+    SHP_SHELL="${SHP_SHELL} -n"
 fi
 
 # Run
