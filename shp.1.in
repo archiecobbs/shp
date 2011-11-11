@@ -43,7 +43,6 @@ Display command line help.
 .It Fl \-version
 Display version and exit.
 .El
-.It Fl a
 .Sh VERSION
 This man page documents
 .Nm
