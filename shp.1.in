@@ -8,6 +8,7 @@
 .Nd Like PHP except you write your script in shell script
 .Sh SYNOPSIS
 .Nm shp
+.Op Ar options
 .Op Ar script Op args ...
 .Sh DESCRIPTION
 .Nm

@@ -9,7 +9,7 @@ DEFAULT_SHP_SHELL="@BASH@ -s"
 usage()
 {
     echo "Usage:" 1>&2
-    echo "    ${SHP_NAME} [ file [ args ... ] ]" 1>&2
+    echo "    ${SHP_NAME} [options] [file [args ...]]" 1>&2
     echo "Options:" 1>&2
     echo "    --check     Check script syntax only (don't execute it)" 1>&2
     echo "    --dump      Dump generated shell script instead of executing it" 1>&2
