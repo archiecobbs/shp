@@ -31,4 +31,4 @@ Today is not Monday, horray!
 
 ```
 
-Read the [man page](ManPage) for details.
+Read the [man page](https://github.com/archiecobbs/shp/wiki/ManPage) for details.
